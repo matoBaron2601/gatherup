@@ -16,8 +16,11 @@ export const getMyEvents = async (
   userEmail: string,
   filters?: EventFilters
 ) => {
-  if(!filters){
-    return await db.select().from(events).where(eq(events.creatorEmail, userEmail));
+  if (!filters) {
+    return await db
+      .select()
+      .from(events)
+      .where(eq(events.creatorEmail, userEmail));
   }
   const parsedFilters = eventFiltersSchema.parse(filters);
 

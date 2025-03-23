@@ -3,6 +3,7 @@ import Attendance from "@/components/attendance";
 import ErrorPage from "@/components/errorPage";
 import EventCalendar from "@/components/eventCalendar";
 import { EventDetails } from "@/components/eventDetails";
+import Recommendation from "@/components/recommendation";
 import { createEventUser } from "@/lib/server/actions/eventUser";
 import { getDayBlockersByEventUserId } from "@/lib/server/fetch/dayBlocker";
 import { getEventById } from "@/lib/server/fetch/event";
@@ -13,7 +14,7 @@ import { Calendar } from "lucide-react";
 import { redirect } from "next/navigation";
 
 export type EventPageProps = {
-  params: Promise<{ id: string }>; // Await this before use
+  params: Promise<{ id: string }>;
   searchParams: Promise<{ [key: string]: string | undefined }>;
 };
 
@@ -26,6 +27,8 @@ const EventPage = async ({ params, searchParams }: EventPageProps) => {
   const eventId = resolvedParams.id;
   const event = await getEventById(eventId);
   const eventUser = await getEventUser(eventId, userEmail);
+
+  const isCreator = event.creatorEmail === userEmail;
 
   if (!eventUser) {
     const token = await validateToken(eventId, resolvedSearchParams);
@@ -40,17 +43,25 @@ const EventPage = async ({ params, searchParams }: EventPageProps) => {
   const dayBlockers = await getDayBlockersByEventUserId(eventUser.id);
 
   return (
-    <div className="flex flex-col gap-8 justify-center">
-      <EventDetails
-        event={event}
-        isCreator={false}
-        creator={{
-          email: user?.email ?? "",
-          name: user?.name ?? "",
-          provider: null,
-          image: user?.image ?? "",
-        }}
-      />
+    <div className="flex flex-col justify-center">
+      <div className="relative">
+        <EventDetails
+          event={event}
+          isCreator={isCreator}
+          creator={{
+            email: user?.email ?? "",
+            name: user?.name ?? "",
+            provider: null,
+            image: user?.image ?? "",
+          }}
+        />
+        {isCreator && (
+          <div className="absolute top-4 right-4">
+            <AdminAction event={event} variant="dots" />
+          </div>
+        )}
+      </div>
+
       <EventCalendar
         eventId={eventId}
         userEmail={userEmail}
@@ -62,6 +73,7 @@ const EventPage = async ({ params, searchParams }: EventPageProps) => {
           end: event.latestPossibleDate,
         }}
       />
+      {/* <Recommendation event={event} /> */}
       <Attendance event={event} />
     </div>
   );

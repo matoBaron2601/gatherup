@@ -24,6 +24,7 @@ import {
 } from "@/lib/server/schemas/personalBlocker";
 import { createPersonalBlocker, deletePersonalBlocker } from "@/lib/server/actions/personalBlocker";
 import { PersonalBlocker } from "@/types/personalBlocker";
+import { convertStringFromDefaultToDotNotation } from "@/lib/helpers";
 
 type DateBlockerFormProps = {
   dateBlockers: PersonalBlocker[];
@@ -72,7 +73,7 @@ const DateBlockerForm = ({ dateBlockers, userEmail }: DateBlockerFormProps) => {
               {dateBlockers.map((dateBlocker) => (
                 <TableRow key={dateBlocker.id}>
                   <TableCell>
-                    {dateBlocker.from} - {dateBlocker.to}
+                    {convertStringFromDefaultToDotNotation(dateBlocker.from)} - {convertStringFromDefaultToDotNotation(dateBlocker.to)}
                   </TableCell>
                   <TableCell className="text-gray-700">
                     {dateBlocker.reason}

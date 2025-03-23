@@ -13,6 +13,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { convertStringFromDefaultToDotNotation } from "@/lib/helpers"
 
 interface DatePickerWithRangeProps extends React.HTMLAttributes<HTMLDivElement> {
   date: { from: string | undefined; to: string | undefined }
@@ -56,10 +57,10 @@ export default function DatePickerWithRange({
             {date.from ? (
               date.to ? (
                 <>
-                  {date.from} - {date.to}
+                  {convertStringFromDefaultToDotNotation(date.from)} - {convertStringFromDefaultToDotNotation(date.to)}
                 </>
               ) : (
-                date.from
+                convertStringFromDefaultToDotNotation(date.from)
               )
             ) : (
               <span>Pick a date</span>

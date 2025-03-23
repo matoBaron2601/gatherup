@@ -16,7 +16,7 @@
   @apply !border !border-input !m-1 !text-foreground !bg-background !shadow-sm hover:!bg-accent hover:!text-accent-foreground;
 }
 .fc-daygrid-day {
-  @apply !border-transparent !rounded-lg  !border-2 !border-white;
+  @apply !border-transparent !rounded-sm !border-2 !border-color4;
 }
 
 .fc-daygrid-day-frame {
@@ -102,6 +102,7 @@ body {
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    --bgColor: "bg-[#555555";
   }
   .dark {
     --background: 240 10% 3.9%;
@@ -146,4 +147,13 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Hide scrollbar but allow scrolling */
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Edge */
+}
+
+.scrollbar-hidden {
+  scrollbar-width: none; /* For Firefox */
 }

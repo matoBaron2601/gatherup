@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from "zod";
 
 export const createEventSchema = z.object({
   name: z.string().min(1),
@@ -7,15 +7,16 @@ export const createEventSchema = z.object({
   latestPossibleDate: z.string(),
 });
 
-export const createEventWithUserSchema = createEventSchema.extend({userEmail: z.string()});
-
+export const createEventWithUserSchema = createEventSchema.extend({
+  userEmail: z.string(),
+});
 
 export const setEventStatusSchema = z.object({
   eventId: z.string(),
   status: z.enum(["opened", "confirmed", "cancelled"]),
-})
+});
 
-export type SetEventStatusValues = z.infer<typeof setEventStatusSchema>
+export type SetEventStatusValues = z.infer<typeof setEventStatusSchema>;
 
 export const eventFiltersSchema = z.object({
   name: z.string().optional(),
@@ -32,4 +33,23 @@ export const eventFiltersSchema = z.object({
 
 export const deleteEventSchema = z.object({
   eventId: z.string(),
-})
+});
+
+export const copyInviteSchema = z.object({
+  eventId: z.string(),
+  token: z.string(),
+});
+
+export const confirmEventSchema = z.object({
+  eventId: z.string(),
+  startDate: z.string(),
+  endDate: z.string(),
+});
+
+export const cancelEventSchema = z.object({
+  eventId: z.string(),
+});
+
+export const reopenEventSchema = z.object({
+  eventId: z.string(),
+});

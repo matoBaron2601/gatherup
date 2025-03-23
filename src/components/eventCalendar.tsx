@@ -10,7 +10,13 @@ import {
   DayBlockerType,
 } from "@/types/dayBlocker";
 import { useEffect, useState } from "react";
-import { eachDayOfInterval, isSameDay, parse, subDays } from "date-fns";
+import {
+  addDays,
+  eachDayOfInterval,
+  isSameDay,
+  parse,
+  subDays,
+} from "date-fns";
 import { convertDateToString, convertStringToDate } from "@/lib/helpers";
 import EventSideBar from "./eventSiderbar";
 import CalendarLegend from "./calendarLegend";
@@ -124,9 +130,10 @@ const EventCalendar = ({
   };
 
   return (
-    <div className="flex flex-col xl:flex-row xl:items-start gap-8">
+    <div className="flex flex-col xl:flex-row xl:items-start gap-8 px-4 py-4">
       <div className="flex flex-col gap-2">
         <FullCalendar
+          longPressDelay={0}
           plugins={[dayGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
           editable
@@ -134,11 +141,11 @@ const EventCalendar = ({
           showNonCurrentDates={false}
           validRange={{
             start: convertStringToDate(range.start),
-            end: convertStringToDate(range.end),
+            end: addDays(convertStringToDate(range.end), 1),
           }}
           headerToolbar={{
-            left: "",
-            center: "title",
+            left: "title",
+            center: "",
             right: "prev,next",
           }}
           dayCellContent={(info) => (
@@ -158,7 +165,7 @@ const EventCalendar = ({
           }}
         />
       </div>
-      <div className="">
+      <div className="lg:min-w-[25%]">
         <EventSideBar
           activeMode={activeMode}
           onModeClick={setActiveMode}

@@ -7,11 +7,11 @@ type InfoItemProps = {
 }
 
 const InfoItem = ({ icon, label, value }: InfoItemProps) => (
-  <div className="flex items-center gap-3">
+  <div className="flex items-center gap-3 text-color1">
     {icon}
     <div>
-      <p className="text-xs font-medium sm:text-sm">{label}</p>
-      <p className="text-xs text-muted-foreground sm:text-sm">{value}</p>
+      <p className="text-xs font-bold sm:text-sm">{label}</p>
+      <p className="text-xs text-l sm:text-sm">{value}</p>
     </div>
   </div>
 )

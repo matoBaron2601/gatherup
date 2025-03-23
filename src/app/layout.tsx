@@ -10,12 +10,11 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { ModalProvider } from "@/hooks/useCreateEventModal";
-import { CreateEventModal } from "@/components/createEventModal";
 import { Toaster } from "@/components/ui/sonner";
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+// const geistSans = Geist({
+//   variable: "--font-geist-sans",
+//   subsets: ["latin"],>
+// });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -37,23 +36,22 @@ const RootLayout = async ({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <SessionProvider session={session}>
           <SidebarProvider>
             <ModalProvider>
               <AppSidebar />
-              <CreateEventModal />
-              <main className="w-full">
-                <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
-                  <div className="flex items-center gap-2 px-4">
-                    <SidebarTrigger className="-ml-1" />
-                    <Separator orientation="vertical" className="mr-2 h-4" />
+              <main className="w-full bg-color1">
+                <header className="fixed w-full flex h-16 shrink-0 items-center gap-2 bg-color1">
+                  <div className="flex items-center gap-2 ml-3">
+                    <SidebarTrigger className="text-color5 hover:bg-color4" />
+                    <Separator orientation="vertical" className="mr-2 h-4 bg-color5" />
                     {breadcrumb}
                   </div>
                 </header>
-                <div className="px-2 lg:px-20 w-full">{children}</div>
-                <Toaster richColors/>
+                <div className="mt-16 bg-color5 rounded-3xl h-[calc(100vh-80px)] max-h-[calc(100vh-80px)] overflow-y-auto md:mr-4 md:scrollbar-auto scrollbar-hidden"> {children} </div>
+                <Toaster richColors />
               </main>
             </ModalProvider>
           </SidebarProvider>

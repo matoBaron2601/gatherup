@@ -7,6 +7,7 @@ import type { User } from "@/types/user";
 import StatusBadge from "./statusBadge";
 import type React from "react";
 import InfoItem from "./infoItem";
+import { convertStringFromDefaultToDotNotation } from "@/lib/helpers";
 
 type EventDetailsProps = {
   event: Event;
@@ -36,45 +37,53 @@ export const EventDetails = ({ event, creator }: EventDetailsProps) => {
   const dateInfo =
     event.status === "opened"
       ? [
-          { label: "Possible from", value: event.earliestPossibleDate },
-          { label: "Possible to", value: event.latestPossibleDate },
+          {
+            label: "Possible from",
+            value: convertStringFromDefaultToDotNotation(
+              event.earliestPossibleDate
+            ),
+          },
+          {
+            label: "Possible to",
+            value: convertStringFromDefaultToDotNotation(
+              event.latestPossibleDate
+            ),
+          },
         ]
       : event.status === "confirmed"
       ? [
-          { label: "Confirmed start", value: event.startDate },
-          { label: "Confirmed end", value: event.endDate },
+          {
+            label: "Confirmed start",
+            value: convertStringFromDefaultToDotNotation(event.startDate ?? ""),
+          },
+          {
+            label: "Confirmed end",
+            value: convertStringFromDefaultToDotNotation(event.endDate ?? ""),
+          },
         ]
       : [];
 
   return (
-    <Card className="h-full">
-      <CardContent className="h-full flex items-center justify-between py-6">
-        <div className="flex gap-16">
-          {commonInfo.map((item, index) => (
-            <InfoItem
-              key={index}
-              icon={item.icon}
-              label={item.label}
-              value={item.value}
-            />
-          ))}
-          {dateInfo.length > 0 && (
-            <div className="flex gap-16">
-              {dateInfo.map((item, index) => (
-                <InfoItem
-                  key={index}
-                  icon={<Calendar className="h-6 w-6 flex-shrink-0" />}
-                  label={item.label}
-                  value={item.value ?? ''}
-                />
-              ))}
-            </div>
-          )}
-        </div>
-        <div className="flex items-center">
-          <StatusBadge status={event.status} />
-        </div>
-      </CardContent>
-    </Card>
+    <div className="grid grid-cols-2 gap-4 md:flex md:gap-16 w-full px-12 py-4">
+      {commonInfo
+        .filter((item) => item.label !== "Name")
+        .map((item, index) => (
+          <InfoItem
+            key={index}
+            icon={item.icon}
+            label={item.label}
+            value={item.value}
+          />
+        ))}
+      {dateInfo.length > 0 &&
+        dateInfo.map((item, index) => (
+          <InfoItem
+            key={index}
+            icon={<Calendar className="h-6 w-6 flex-shrink-0" />}
+            label={item.label}
+            value={item.value ?? ""}
+          />
+        ))}
+    </div>
   );
 };

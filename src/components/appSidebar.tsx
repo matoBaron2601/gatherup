@@ -30,6 +30,11 @@ const items = [
     url: "/account/blockers",
     icon: User,
   },
+  {
+    title: "Create event",
+    url: "/event/create",
+    icon: Plus,
+  },
 ];
 const AppSidebar = ({ ...props }: ComponentProps<typeof Sidebar>) => {
   const { data: session } = useSession({ required: true });
@@ -40,10 +45,13 @@ const AppSidebar = ({ ...props }: ComponentProps<typeof Sidebar>) => {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="mt-12">
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton
+                    asChild
+                    className="hover:bg-color4 hover:text-color1 text-color5 font-bold"
+                  >
                     <a href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
@@ -51,24 +59,15 @@ const AppSidebar = ({ ...props }: ComponentProps<typeof Sidebar>) => {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
-              <SidebarMenuItem key={"create-event"}>
-                <SidebarMenuButton asChild>
-                  <button onClick={openModal}>
-                    <Plus />
-                    Create event
-                  </button>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
+      <SidebarFooter className="text-color5 hover:bg-color-4">
         <NavUser user={session?.user} />
       </SidebarFooter>
-      <SidebarRail />
     </Sidebar>
-  );
+  );-
 };
 
 export default AppSidebar;

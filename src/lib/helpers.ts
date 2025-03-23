@@ -22,6 +22,13 @@ export const convertDateToString = (date: Date): string => {
   return `${day}-${month}-${year}`;
 };
 
+export const convertStringFromDefaultToDotNotation = (dateString: string) => {
+  return dateString.replace(/\-/g, ".");
+};
+export const convertStringFromDotToDefaultNotation = (dateString: string) => {
+  return dateString.replace(/./g, "-");
+};
+export const createUUIDToken = () => crypto.randomUUID();
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

@@ -5,50 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1736256231036,
-      "tag": "0000_curly_retro_girl",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1736972098876,
-      "tag": "0001_modern_franklin_richards",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1737470405301,
-      "tag": "0002_dark_kid_colt",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1738094321124,
-      "tag": "0003_worthless_nightshade",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1738489481389,
-      "tag": "0004_deep_gunslinger",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "7",
-      "when": 1738519344553,
-      "tag": "0005_messy_korvac",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "7",
-      "when": 1739029500697,
-      "tag": "0006_neat_tarantula",
+      "when": 1741436763810,
+      "tag": "0000_friendly_phantom_reporter",
       "breakpoints": true
     }
   ]

@@ -4,6 +4,7 @@ import {
   text,
   timestamp,
   uuid,
+  numeric,
 } from "drizzle-orm/pg-core";
 
 export const users = pgTable("users", {
@@ -31,6 +32,8 @@ export const events = pgTable("event", {
   startDate: text("startDate"),
   endDate: text("endDate"),
   status: eventStatusEnum("status").notNull().default("opened"),
+  minDuration: text("minDuration"),
+  maxDuration: text("maxDuration"),
 });
 
 export const eventsUsers = pgTable("eventUser", {
@@ -43,10 +46,7 @@ export const eventsUsers = pgTable("eventUser", {
     .references(() => users.email, { onDelete: "cascade" }),
 });
 
-export const dayBlockersTypeEnum = pgEnum("dayBlockersType", [
-  "100",
-  "50",
-]);
+export const dayBlockersTypeEnum = pgEnum("dayBlockersType", ["100", "50"]);
 
 export const dayBlockers = pgTable("dayBlocker", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -65,7 +65,6 @@ export const eventVerificationTokens = pgTable("eventVerificationToken", {
     .references(() => events.id, { onDelete: "cascade" }),
   expires: timestamp("expires", { mode: "date" }),
 });
-
 
 export const personalBlockers = pgTable("personalBlocker", {
   id: uuid("id").primaryKey().defaultRandom(),

@@ -1,43 +1,39 @@
-import db from "@/db";
-import { events, eventsUsers } from "@/db/schema";
-import { eq, and, ne } from "drizzle-orm";
-import { Event } from "@/types/event";
-import EventSection from "@/components/eventSection";
 import { getAuthenticatedUser } from "@/lib/server/fetch/user";
 import { getMyEvents } from "@/lib/server/fetch/event";
-const Home = async () => {
+import { Event } from "@/types/event";
+import EventSection from "@/components/eventSection";
+import FilterButtons from "@/components/filterButtons";
+
+const Home = async ({
+  searchParams,
+}: {
+  searchParams: { filter?: string };
+}) => {
   const user = await getAuthenticatedUser();
   const userEmail = user?.email ?? "";
 
- 
+  const filter = searchParams.filter || "All";
 
-  const createdEvents: Event[] = await getMyEvents(userEmail);
+  const fetchEvents = async (filter: string) => {
+    let eventFilter = {};
+    if (filter === "Opened") {
+      eventFilter = { status: "opened" };
+    } else if (filter === "Confirmed") {
+      eventFilter = { status: "confirmed" };
+    } else if (filter === "Cancelled") {
+      eventFilter = { status: "cancelled" };
+    }
 
-  const attendedEvents: Event[] = await db
-    .select({
-      id: events.id,
-      creatorEmail: events.creatorEmail,
-      name: events.name,
-      description: events.description,
-      earliestPossibleDate: events.earliestPossibleDate,
-      latestPossibleDate: events.latestPossibleDate,
-      startDate: events.startDate,
-      endDate: events.endDate,
-      status: events.status,
-    })
-    .from(events)
-    .innerJoin(eventsUsers, eq(events.id, eventsUsers.eventId))
-    .where(
-      and(
-        eq(eventsUsers.userEmail, userEmail),
-        ne(events.creatorEmail, userEmail)
-      )
-    );
+    return await getMyEvents(userEmail, eventFilter);
+  };
+
+  const createdEvents: Event[] = await fetchEvents(filter);
 
   return (
-    <div className="flex flex-col gap-12">
+    <div className="flex flex-col gap-4 px-8 pt-4">
+      <FilterButtons currentFilter={searchParams.filter} />
+      <div className="w-full h-1 bg-color4 rounded-lg"/>
       <EventSection title="Created Events" events={createdEvents} isCreator />
-      <EventSection title="Attended Events" events={createdEvents} />
     </div>
   );
 };

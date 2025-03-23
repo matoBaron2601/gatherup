@@ -10,8 +10,7 @@ const EventSection = ({ title, events, isCreator = false }: EventSectionProps) =
 
   return (
     <section>
-      <p>{title}</p>
-      <div className='flex gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+      <div className='flex gap-6 grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4'>
         {events.map((event) => (
           <EventCard key={event.id} {...event} event={event} isCreator={isCreator} />
         ))}

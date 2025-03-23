@@ -37,7 +37,7 @@ export const NavUser = ({ user }: { user?: User }) => {
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground hover:bg-color4"
             >
               <Avatar className="h-8 w-8 rounded-lg">
                 <AvatarImage src={user?.image ?? ""} alt={fullName} />
@@ -46,14 +46,14 @@ export const NavUser = ({ user }: { user?: User }) => {
                 </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">{fullName}</span>
+                <span className="truncate font-bold">{fullName}</span>
                 <span className="truncate text-xs">{user?.email}</span>
               </div>
               <CaretSortIcon className="ml-auto size-4" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
+            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg bg-color5 border border-color4"
             side={isMobile ? "bottom" : "right"}
             align="end"
             sideOffset={4}
@@ -72,7 +72,6 @@ export const NavUser = ({ user }: { user?: User }) => {
                 </div>
               </div>
             </DropdownMenuLabel>
-            <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <Link href="/account/blockers">
                 <DropdownMenuItem className="cursor-pointer">
@@ -81,7 +80,6 @@ export const NavUser = ({ user }: { user?: User }) => {
                 </DropdownMenuItem>
               </Link>
             </DropdownMenuGroup>
-            <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={() => signOut()}
               className="cursor-pointer"
