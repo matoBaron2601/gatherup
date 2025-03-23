@@ -67,7 +67,7 @@ const AppSidebar = ({ ...props }: ComponentProps<typeof Sidebar>) => {
         <NavUser user={session?.user} />
       </SidebarFooter>
     </Sidebar>
-  );-
+  );
 };
 
 export default AppSidebar;
