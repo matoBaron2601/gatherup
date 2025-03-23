@@ -6,10 +6,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import db from "@/db";
-import { eq } from "drizzle-orm";
-import { events } from "@/db/schema";
-import type { Event } from "@/types/event";
 
 type EventPageProps = {
   params: Promise<{ id: string }>;
@@ -18,10 +14,6 @@ type EventPageProps = {
 const BreadcrumbEventPage = async ({ params }: EventPageProps) => {
   const resolvedParams = await params;
 
-  const result = await db
-    .select()
-    .from(events)
-    .where(eq(events.id, resolvedParams.id));
 
   return (
     <Breadcrumb>

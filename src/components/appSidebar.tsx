@@ -16,7 +16,6 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { NavUser } from "./navUser";
-import { useModal } from "@/hooks/useCreateEventModal";
 
 const items = [
   {

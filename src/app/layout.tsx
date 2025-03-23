@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Geist_Mono } from "next/font/google";
 import { getServerSession } from "next-auth";
 import "./globals.css";
 import SessionProvider from "@/providers/SessionProvider";

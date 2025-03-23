@@ -6,7 +6,6 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import {
   CalendarDayBlocker,
-  DayBlocker,
   DayBlockerType,
 } from "@/types/dayBlocker";
 import { useEffect, useState } from "react";
@@ -19,7 +18,6 @@ import {
 } from "date-fns";
 import { convertDateToString, convertStringToDate } from "@/lib/helpers";
 import EventSideBar from "./eventSiderbar";
-import CalendarLegend from "./calendarLegend";
 import { replaceDayBlockers } from "@/lib/server/actions/dayBlocker";
 
 export type Mode = DayBlockerType | "0";
@@ -60,7 +58,6 @@ const getCellClassName = (date: Date, blockers: CalendarDayBlocker[]) => {
 
 const EventCalendar = ({
   eventId,
-  userEmail,
   eventUserId,
   dayBlockers,
   range,
