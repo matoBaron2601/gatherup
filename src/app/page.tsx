@@ -32,7 +32,6 @@ const Home = async ({
   return (
     <div className="flex flex-col gap-4 px-8 pt-4">
       <FilterButtons currentFilter={searchParams.filter} />
-      <div className="w-full h-1 bg-color4 rounded-lg"/>
       <EventSection title="Created Events" events={createdEvents} isCreator />
     </div>
   );
