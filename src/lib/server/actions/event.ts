@@ -9,7 +9,6 @@ import {
   createEventWithUserSchema,
   deleteEventSchema,
   reopenEventSchema,
-  setEventStatusSchema,
 } from "../schemas/event";
 import { actionClient } from "@/lib/safeAction";
 import { eq } from "drizzle-orm";

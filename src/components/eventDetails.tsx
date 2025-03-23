@@ -1,10 +1,8 @@
 "use client";
 
 import { Calendar, ClipboardList, User2 } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
 import type { Event } from "@/types/event";
 import type { User } from "@/types/user";
-import StatusBadge from "./statusBadge";
 import type React from "react";
 import InfoItem from "./infoItem";
 import { convertStringFromDefaultToDotNotation } from "@/lib/helpers";

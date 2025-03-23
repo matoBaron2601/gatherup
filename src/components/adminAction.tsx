@@ -23,13 +23,11 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
+
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ConfirmationModal } from "./confirmationModal";
 import { createUUIDToken } from "@/lib/helpers";
-import { Card, CardContent } from "./ui/card";
 
 type AdminActionProps = {
   event: Event;
@@ -44,7 +42,7 @@ export const AdminAction = ({ event, variant }: AdminActionProps) => {
   }>({ isOpen: false, type: null });
 
   const closeModal = () => setModalState({ isOpen: false, type: null });
-
+  console.info(isEditModalOpen)
   const handleAction = async (
     action: "reopen" | "confirm" | "cancel" | "delete"
   ) => {

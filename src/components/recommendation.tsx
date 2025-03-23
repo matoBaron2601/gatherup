@@ -2,7 +2,6 @@ import { convertDateToString, convertStringToDate } from "@/lib/helpers";
 import { getDayBlockersByEventUserId } from "@/lib/server/fetch/dayBlocker";
 import {
   getEventUsersByEventId,
-  getUsersByEventId,
 } from "@/lib/server/fetch/eventUser";
 import { Event } from "@/types/event";
 import { eachDayOfInterval } from "date-fns";

@@ -1,8 +1,6 @@
 "use client";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { DayBlockerType } from "@/types/dayBlocker";
 import { Mode } from "./eventCalendar";
 
 export type EventSideBarProps = {
@@ -16,7 +14,6 @@ const EventSideBar = ({
   activeMode,
   onModeClick,
   onSubmit,
-  onIntegrateWithDateBlockers,
 }: EventSideBarProps) => {
   const modes: { label: string; mode: Mode; color: string }[] = [
     { label: "Available", mode: "0", color: "bg-green-500 bg-green-300 hover:bg-green-300" },

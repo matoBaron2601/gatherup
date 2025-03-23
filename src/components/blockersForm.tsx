@@ -1,8 +1,6 @@
 "use client";
 
-import { Trash2, Plus, CalendarIcon, Calendar } from "lucide-react";
-import { format } from "date-fns";
-import { useSession } from "next-auth/react";
+import { Trash2, Plus } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";

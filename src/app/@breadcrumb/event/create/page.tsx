@@ -22,7 +22,6 @@ const BreadcrumbEventPage = async ({ params }: EventPageProps) => {
     .select()
     .from(events)
     .where(eq(events.id, resolvedParams.id));
-  const event: Event = result[0];
 
   return (
     <Breadcrumb>

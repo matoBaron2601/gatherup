@@ -14,7 +14,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarRail,
 } from "@/components/ui/sidebar";
 import { NavUser } from "./navUser";
 import { useModal } from "@/hooks/useCreateEventModal";
@@ -38,7 +37,6 @@ const items = [
 ];
 const AppSidebar = ({ ...props }: ComponentProps<typeof Sidebar>) => {
   const { data: session } = useSession({ required: true });
-  const { openModal } = useModal();
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader />

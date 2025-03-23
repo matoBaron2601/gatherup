@@ -15,7 +15,6 @@ import db from "@/db";
 import { Event } from "@/types/event";
 import {
   getEventUsersByEventId,
-  getUsersByEventId,
 } from "@/lib/server/fetch/eventUser";
 import { convertStringToDate } from "@/lib/helpers";
 import { DayBlocker } from "@/types/dayBlocker";

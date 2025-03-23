@@ -3,7 +3,6 @@ import Attendance from "@/components/attendance";
 import ErrorPage from "@/components/errorPage";
 import EventCalendar from "@/components/eventCalendar";
 import { EventDetails } from "@/components/eventDetails";
-import Recommendation from "@/components/recommendation";
 import { createEventUser } from "@/lib/server/actions/eventUser";
 import { getDayBlockersByEventUserId } from "@/lib/server/fetch/dayBlocker";
 import { getEventById } from "@/lib/server/fetch/event";
