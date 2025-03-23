@@ -7,13 +7,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
-type EventPageProps = {
-  params: Promise<{ id: string }>;
-};
-
-const BreadcrumbEventPage = async ({ params }: EventPageProps) => {
-  const resolvedParams = await params;
-
+const BreadcrumbEventPage = async () => {
 
   return (
     <Breadcrumb>
