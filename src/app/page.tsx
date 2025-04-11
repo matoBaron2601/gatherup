@@ -48,7 +48,6 @@ const Home = async ({
         (createdEvent) => createdEvent.id === attendedEvent.id
       )
   );
-  console.log("attended", attendedEvents);
 
   return (
     <div className="flex flex-col gap-4 px-8 pt-4">
