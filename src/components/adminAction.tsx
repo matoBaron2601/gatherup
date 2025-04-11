@@ -23,7 +23,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ConfirmationModal } from "./confirmationModal";
@@ -42,9 +41,11 @@ export const AdminAction = ({ event, variant }: AdminActionProps) => {
   }>({ isOpen: false, type: null });
 
   const closeModal = () => setModalState({ isOpen: false, type: null });
-  console.info(isEditModalOpen)
+  console.info(isEditModalOpen);
   const handleAction = async (
-    action: "reopen" | "confirm" | "cancel" | "delete"
+    action: "reopen" | "confirm" | "cancel" | "delete",
+    startDate:string,
+    endDate:string,
   ) => {
     const actionConfig = {
       reopen: {
@@ -57,8 +58,8 @@ export const AdminAction = ({ event, variant }: AdminActionProps) => {
         action: () =>
           confirmEvent({
             eventId: event.id,
-            startDate: event.earliestPossibleDate,
-            endDate: event.latestPossibleDate,
+            startDate: startDate,
+            endDate: endDate,
           }),
 
         loading: "Confirming event...",
@@ -124,7 +125,7 @@ export const AdminAction = ({ event, variant }: AdminActionProps) => {
       <ConfirmationModal
         isOpen={modalState.isOpen}
         onClose={closeModal}
-        onConfirm={() => handleAction(modalState.type!)}
+        onConfirm={() => handleAction(modalState.type!, '01-01-2024', '01-02-2024')}
         {...modalConfig[modalState.type]}
       />
     );
@@ -148,11 +149,13 @@ export const AdminAction = ({ event, variant }: AdminActionProps) => {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger>
-          <Ellipsis/>
+          <Ellipsis />
         </DropdownMenuTrigger>
         <DropdownMenuContent className="bg-color5 border border-color4">
-          
-          <DropdownMenuItem onClick={handleCopyInvite} className="hover:bg-red-500">
+          <DropdownMenuItem
+            onClick={handleCopyInvite}
+            className="hover:bg-red-500"
+          >
             <Copy className="mr-2 h-4 w-4" />
             Copy Invite
           </DropdownMenuItem>
@@ -204,59 +207,58 @@ export const AdminAction = ({ event, variant }: AdminActionProps) => {
 
   if (variant === "card") {
     return (
-          <div className="grid grid-cols-2 gap-4 md:flex md:gap-16 w-full px-12 py-4">
-            <button
-              onClick={handleCopyInvite}
-              className="flex items-center text-gray-600 hover:text-gray-800"
-            >
-              <Copy className="mr-2 h-4 w-4" />
-              Copy Invite
-            </button>
-            {event.status !== "opened" && (
-              <button
-                onClick={() => setModalState({ isOpen: true, type: "reopen" })}
-                className="flex items-center text-blue-600 hover:text-blue-800"
-              >
-                <RefreshCw className="mr-2 h-4 w-4" />
-                Reopen
-              </button>
-            )}
-            {event.status !== "cancelled" && (
-              <button
-                onClick={() => setIsEditModalOpen(true)}
-                className="flex items-center text-gray-600 hover:text-gray-800"
-              >
-                <Edit className="mr-2 h-4 w-4" />
-                Edit
-              </button>
-            )}
-            {event.status !== "confirmed" && (
-              <button
-                onClick={() => setModalState({ isOpen: true, type: "confirm" })}
-                className="flex items-center text-green-600 hover:text-green-800"
-              >
-                <Check className="mr-2 h-4 w-4" />
-                Confirm
-              </button>
-            )}
-            {event.status !== "cancelled" && (
-              <button
-                onClick={() => setModalState({ isOpen: true, type: "cancel" })}
-                className="flex items-center text-orange-600 hover:text-orange-800"
-              >
-                <X className="mr-2 h-4 w-4" />
-                Cancel
-              </button>
-            )}
-            <button
-              onClick={() => setModalState({ isOpen: true, type: "delete" })}
-              className="flex items-center text-red-600 hover:text-red-800"
-            >
-              <Trash2 className="mr-2 h-4 w-4" />
-              Delete
-            </button>
-          </div>
-
+      <div className="grid grid-cols-2 gap-4 md:flex md:gap-16 w-full px-12 py-4">
+        <button
+          onClick={handleCopyInvite}
+          className="flex items-center text-gray-600 hover:text-gray-800"
+        >
+          <Copy className="mr-2 h-4 w-4" />
+          Copy Invite
+        </button>
+        {event.status !== "opened" && (
+          <button
+            onClick={() => setModalState({ isOpen: true, type: "reopen" })}
+            className="flex items-center text-blue-600 hover:text-blue-800"
+          >
+            <RefreshCw className="mr-2 h-4 w-4" />
+            Reopen
+          </button>
+        )}
+        {event.status !== "cancelled" && (
+          <button
+            onClick={() => setIsEditModalOpen(true)}
+            className="flex items-center text-gray-600 hover:text-gray-800"
+          >
+            <Edit className="mr-2 h-4 w-4" />
+            Edit
+          </button>
+        )}
+        {event.status !== "confirmed" && (
+          <button
+            onClick={() => setModalState({ isOpen: true, type: "confirm" })}
+            className="flex items-center text-green-600 hover:text-green-800"
+          >
+            <Check className="mr-2 h-4 w-4" />
+            Confirm
+          </button>
+        )}
+        {event.status !== "cancelled" && (
+          <button
+            onClick={() => setModalState({ isOpen: true, type: "cancel" })}
+            className="flex items-center text-orange-600 hover:text-orange-800"
+          >
+            <X className="mr-2 h-4 w-4" />
+            Cancel
+          </button>
+        )}
+        <button
+          onClick={() => setModalState({ isOpen: true, type: "delete" })}
+          className="flex items-center text-red-600 hover:text-red-800"
+        >
+          <Trash2 className="mr-2 h-4 w-4" />
+          Delete
+        </button>
+      </div>
     );
   }
 };

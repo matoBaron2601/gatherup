@@ -18,11 +18,22 @@ export const authOptions: AuthOptions = {
   callbacks: {
     async signIn({ user, account }: { user: User; account: Account | null }) {
       try {
+        console.log("SignIn callback triggered with:", { user, account });
+
+        // Abort if no email or account
         if (!account || !user.email) {
-          console.error("Missing account or email.");
+          console.error("Missing account or user email:", { account, user });
           return false;
         }
 
+        console.log("Saving user to database:", {
+          email: user.email,
+          name: user.name,
+          image: user.image,
+          provider: account.provider,
+        });
+
+        // Add user to database
         await db
           .insert(users)
           .values({
@@ -40,10 +51,11 @@ export const authOptions: AuthOptions = {
             },
           });
 
-        return true; // Allow sign-in
+        console.log("User successfully saved to the database.");
+        return true; // Login allowed
       } catch (error) {
-        console.error("Error saving user to database:", error);
-        return false; // Deny sign-in on error
+        console.error("Error in signIn callback:", error);
+        return false; // Deny login on error
       }
     },
   },

@@ -1,5 +1,5 @@
 import { getAuthenticatedUser } from "@/lib/server/fetch/user";
-import { getMyEvents } from "@/lib/server/fetch/event";
+import { getAttendedEvents, getMyEvents } from "@/lib/server/fetch/event";
 import { Event } from "@/types/event";
 import EventSection from "@/components/eventSection";
 import FilterButtons from "@/components/filterButtons";
@@ -7,14 +7,15 @@ import FilterButtons from "@/components/filterButtons";
 const Home = async ({
   searchParams,
 }: {
-  searchParams: { filter?: string };
+  searchParams: Promise<{ filter?: string }>;
 }) => {
-  const user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser('');
   const userEmail = user?.email ?? "";
+  const resolvedSearchParams = await searchParams;
 
-  const filter = searchParams.filter || "All";
+  const filter = resolvedSearchParams.filter || "All";
 
-  const fetchEvents = async (filter: string) => {
+  const fetchMyEvents = async (filter: string) => {
     let eventFilter = {};
     if (filter === "Opened") {
       eventFilter = { status: "opened" };
@@ -27,12 +28,33 @@ const Home = async ({
     return await getMyEvents(userEmail, eventFilter);
   };
 
-  const createdEvents: Event[] = await fetchEvents(filter);
+  const fetchAttendedEvents = async (filter: string) => {
+    let eventFilter = {};
+    if (filter === "Opened") {
+      eventFilter = { status: "opened" };
+    } else if (filter === "Confirmed") {
+      eventFilter = { status: "confirmed" };
+    } else if (filter === "Cancelled") {
+      eventFilter = { status: "cancelled" };
+    }
+    return await getAttendedEvents(userEmail);
+  };
+
+  const createdEvents: Event[] = await fetchMyEvents(filter);
+  const attendedEvents: Event[] = await fetchAttendedEvents(filter);
+  const notCreatedButAttendedEvents = attendedEvents.filter(
+    (attendedEvent) =>
+      !createdEvents.some(
+        (createdEvent) => createdEvent.id === attendedEvent.id
+      )
+  );
+  console.log("attended", attendedEvents);
 
   return (
     <div className="flex flex-col gap-4 px-8 pt-4">
-      <FilterButtons currentFilter={searchParams.filter} />
+      <FilterButtons currentFilter={resolvedSearchParams.filter} />
       <EventSection title="Created Events" events={createdEvents} isCreator />
+      <EventSection title="Attended Events" events={notCreatedButAttendedEvents} />
     </div>
   );
 };
