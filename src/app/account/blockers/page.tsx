@@ -4,7 +4,7 @@ import { getAuthenticatedUser } from "@/lib/server/fetch/user";
 import { getPersonalBlockersByUserEmail } from "@/lib/server/fetch/personalBlocker";
 
 const PersonalBlockersPage = async () => {
-  const user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser('account/blockers');
   const userEmail = user?.email ?? "";
   const personalBlockers = await getPersonalBlockersByUserEmail(userEmail);
 
