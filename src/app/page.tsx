@@ -37,6 +37,7 @@ const Home = async ({
     } else if (filter === "Cancelled") {
       eventFilter = { status: "cancelled" };
     }
+    console.info(eventFilter)
     return await getAttendedEvents(userEmail);
   };
 

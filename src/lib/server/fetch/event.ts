@@ -1,7 +1,7 @@
 import db from "@/db";
-import { events, eventsUsers, users } from "@/db/schema";
+import { events, eventsUsers } from "@/db/schema";
 import { EventFilters } from "@/types/event";
-import { eq, like, and, gte, lte, ne } from "drizzle-orm";
+import { eq, like, and, gte, lte } from "drizzle-orm";
 import { eventFiltersSchema } from "../schemas/event";
 
 export const getEventById = async (eventId: string) => {

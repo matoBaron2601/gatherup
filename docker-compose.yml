@@ -1,4 +1,4 @@
-version: '3.9'
+version: '3.3'
 
 services:
   postgres:
@@ -9,3 +9,4 @@ services:
       - POSTGRES_PASSWORD=POSTGRES
       - POSTGRES_USER=POSTGRES
       - POSTGRES_DB=POSTGRES
+
