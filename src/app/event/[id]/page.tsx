@@ -20,7 +20,9 @@ export type EventPageProps = {
 const EventPage = async ({ params, searchParams }: EventPageProps) => {
   const resolvedParams = await params;
   const resolvedSearchParams = await searchParams;
-  const user = await getAuthenticatedUser(`event/${resolvedParams.id}`);
+  const user = await getAuthenticatedUser(
+    `event/${resolvedParams.id}?token=${resolvedSearchParams.token}`
+  );
   const userEmail = user?.email ?? "";
   const eventId = resolvedParams.id;
   const event = await getEventById(eventId);
