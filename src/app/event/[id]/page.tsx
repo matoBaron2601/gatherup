@@ -8,7 +8,8 @@ import { getDayBlockersByEventUserId } from "@/lib/server/fetch/dayBlocker";
 import { getEventById } from "@/lib/server/fetch/event";
 import { getEventUser } from "@/lib/server/fetch/eventUser";
 import { validateToken } from "@/lib/server/fetch/token";
-import { getAuthenticatedUser } from "@/lib/server/fetch/user";
+import { getAuthenticatedUser, getUserByEmail } from "@/lib/server/fetch/user";
+import { User } from "@/types/user";
 import { Calendar } from "lucide-react";
 import { redirect } from "next/navigation";
 
@@ -41,6 +42,7 @@ const EventPage = async ({ params, searchParams }: EventPageProps) => {
   }
 
   const dayBlockers = await getDayBlockersByEventUserId(eventUser.id);
+  const creatorUser = await getUserByEmail(event.creatorEmail ?? "");
 
   return (
     <div className="flex flex-col justify-center">
@@ -48,12 +50,7 @@ const EventPage = async ({ params, searchParams }: EventPageProps) => {
         <EventDetails
           event={event}
           isCreator={isCreator}
-          creator={{
-            email: user?.email ?? "",
-            name: user?.name ?? "",
-            provider: null,
-            image: user?.image ?? "",
-          }}
+          creator={creatorUser[0]}
         />
         {isCreator && (
           <div className="absolute top-4 right-4">

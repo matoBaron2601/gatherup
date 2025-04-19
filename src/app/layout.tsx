@@ -7,6 +7,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import { ModalProvider } from "@/hooks/useCreateEventModal";
 import { Toaster } from "@/components/ui/sonner";
+import InAppBrowserWarning from "@/components/inAppBrowserWarning";
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
 //   subsets: ["latin"],>
@@ -34,6 +35,7 @@ const RootLayout = async ({
             <ModalProvider>
               <AppSidebar />
               <main className="w-full bg-color1">
+                <InAppBrowserWarning />
                 <header className="fixed w-full flex h-16 shrink-0 items-center gap-2 bg-color1">
                   <div className="flex items-center gap-2 ml-3">
                     <SidebarTrigger className="text-color5 hover:bg-color4" />
