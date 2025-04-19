@@ -7,7 +7,6 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import { ModalProvider } from "@/hooks/useCreateEventModal";
 import { Toaster } from "@/components/ui/sonner";
-import InAppBrowserWarning from "@/components/inAppBrowserWarning";
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
 //   subsets: ["latin"],>
