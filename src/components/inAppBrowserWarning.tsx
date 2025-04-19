@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react";
 
 export default function InAppBrowserWarning() {
-  const [showWarning, setShowWarning] = useState(false);
+  const [_showWarning, setShowWarning] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined" && isInAppBrowser()) {
