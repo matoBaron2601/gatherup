@@ -1,28 +1,28 @@
 // components/InAppBrowserWarning.tsx
 "use client";
 
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
 export default function InAppBrowserWarning() {
-  const [_showWarning, setShowWarning] = useState(false);
+  // const [_showWarning, setShowWarning] = useState(false);
 
-  useEffect(() => {
-    if (typeof window !== "undefined" && isInAppBrowser()) {
-      setShowWarning(true);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (typeof window !== "undefined" && isInAppBrowser()) {
+  //     setShowWarning(true);
+  //   }
+  // }, []);
 
-  function isInAppBrowser() {
-    const ua = navigator.userAgent || "";
-    return (
-      ua.includes("FBAN") || 
-      ua.includes("FBAV") || 
-      ua.includes("Instagram") ||
-      ua.includes("Line") ||
-      ua.includes("Messenger") ||
-      ua.includes("WhatsApp")
-    );
-  }
+  // function isInAppBrowser() {
+  //   const ua = navigator.userAgent || "";
+  //   return (
+  //     ua.includes("FBAN") || 
+  //     ua.includes("FBAV") || 
+  //     ua.includes("Instagram") ||
+  //     ua.includes("Line") ||
+  //     ua.includes("Messenger") ||
+  //     ua.includes("WhatsApp")
+  //   );
+  // }
 
 
   return (
