@@ -24,7 +24,6 @@ export default function InAppBrowserWarning() {
     );
   }
 
-  if (!showWarning) return null;
 
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
