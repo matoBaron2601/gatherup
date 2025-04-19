@@ -9,7 +9,6 @@ import { getEventById } from "@/lib/server/fetch/event";
 import { getEventUser } from "@/lib/server/fetch/eventUser";
 import { validateToken } from "@/lib/server/fetch/token";
 import { getAuthenticatedUser, getUserByEmail } from "@/lib/server/fetch/user";
-import { User } from "@/types/user";
 import { Calendar } from "lucide-react";
 import { redirect } from "next/navigation";
 
